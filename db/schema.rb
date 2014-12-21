@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141220231759) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "lists", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -29,7 +32,7 @@ ActiveRecord::Schema.define(version: 20141220231759) do
     t.string   "password_digest"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   create_table "words", force: true do |t|
     t.string   "chinese"
@@ -40,6 +43,6 @@ ActiveRecord::Schema.define(version: 20141220231759) do
     t.datetime "updated_at"
   end
 
-  add_index "words", ["list_id"], name: "index_words_on_list_id"
+  add_index "words", ["list_id"], name: "index_words_on_list_id", using: :btree
 
 end

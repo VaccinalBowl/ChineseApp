@@ -1,0 +1,19 @@
+<p>
+  <strong>Chinese:</strong>
+  <%= word.chinese %>
+</p>
+ 
+<p>
+  <strong>Pinyin:</strong>
+  <%= word.pinyin %>
+</p>
+
+<p>
+  <strong>Translation:</strong>
+  <%= word.translation %>
+</p>
+<p>
+  <%= link_to 'Destroy Word', [word.list, word],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>

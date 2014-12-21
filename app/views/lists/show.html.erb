@@ -1,0 +1,33 @@
+<p>
+  <strong>Name:</strong>
+  <%= @list.name %>
+</p>
+ 
+<p>
+  <strong>Description:</strong>
+  <%= @list.description %>
+</p>
+ 
+<%= link_to 'Back', lists_path %>
+
+<h2>Words</h2>
+<table>
+<tr>
+  <th>Chinese</th>
+  <th>Pinyin</th>
+  <th>Translation</th>
+  <th></th>
+</tr>
+
+<%= render @list.words %>
+</table>
+
+
+
+<h2>Add a word:</h2>
+<%= render "words/form" %>
+
+ 
+<%= link_to 'Back', lists_path %>
+| <%= link_to 'Edit', edit_list_path(@list) %>
+

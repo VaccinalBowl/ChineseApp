@@ -1,0 +1,18 @@
+<%= form_for([@list, @list.words.build]) do |f| %>
+  <p>
+    <%= f.label :chinese %><br>
+    <%= f.text_field :chinese %>
+  </p>
+  <p>
+    <%= f.label :pinyin %><br>
+    <%= f.text_field :pinyin %>
+  </p>
+  <p>
+    <%= f.label :translation %><br>
+    <%= f.text_field :translation %>
+  </p>
+  
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

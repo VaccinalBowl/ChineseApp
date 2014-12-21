@@ -12,7 +12,7 @@ class WordsController < ApplicationController
     redirect_to list_path(@list)
   end
   
-  
+  ##A Test
   
   private
   def word_params

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'application#home'
+  #root 'application#home'
   # Example of regular route:
   #get 'words/addmany' 
   #get 'words/destroyall' => 'words#destroyall'

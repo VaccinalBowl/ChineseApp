@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get     'login'      => 'sessions#new'
   post    'login'      => 'sessions#create'
   delete  'logout'     => 'sessions#destroy'
-
+  
 
   get 'users/new'
 
@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :users
+  resources :account_activations, only: [:edit]
+
   resources :lists do     
     resources :words    
   end 

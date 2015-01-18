@@ -11,45 +11,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225171132) do
+ActiveRecord::Schema.define(version: 20150101220420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "lists", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "collaborators_lists", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "list_id"
   end
 
+  create_table "lists", force: :cascade do |t|
+    t.string  "name"
+    t.text    "description"
+    t.integer "user_id"
+  end
+
+  create_table "lists_users", id: false, force: :cascade do |t|
+    t.integer "list_id"
+    t.integer "user_id"
+  end
+
+  create_table "lists_words", id: false, force: :cascade do |t|
+    t.integer "list_id"
+    t.integer "word_id"
+  end
+
+  add_index "lists_words", ["list_id"], name: "index_lists_words_on_list_id", using: :btree
+  add_index "lists_words", ["word_id"], name: "index_lists_words_on_word_id", using: :btree
+
+  create_table "microposts", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "picture"
+  end
+
+  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
+  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "email",             limit: 255
-    t.string   "g",                 limit: 255
+    t.string   "name"
+    t.string   "email"
+    t.string   "g"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest",   limit: 255
-    t.string   "remember_digest",   limit: 255
+    t.string   "password_digest"
+    t.string   "remember_digest"
     t.boolean  "admin"
-    t.string   "activation_digest", limit: 255
+    t.string   "activation_digest"
     t.boolean  "activated"
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   create_table "words", force: :cascade do |t|
-    t.string   "chinese",     limit: 255
-    t.string   "pinyin",      limit: 255
-    t.string   "translation", limit: 255
-    t.integer  "list_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "chinese"
+    t.string "pinyin"
+    t.string "translation"
   end
-
-  add_index "words", ["list_id"], name: "index_words_on_list_id", using: :btree
 
 end

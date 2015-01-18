@@ -1,4 +1,7 @@
 class WordsController < ApplicationController
+  before_action :editor, only: [:destroy, :create] 
+
+
   def create
     @list = List.find(params[:list_id])
     @word = @list.words.create(word_params)
@@ -9,15 +12,27 @@ class WordsController < ApplicationController
     @list = List.find(params[:list_id])
     @word = @list.words.find(params[:id])
     @word.destroy
+    flash[:success] = "Word deleted"
     redirect_to list_path(@list)
   end
   
-  ##A Test
+  
   
   private
   def word_params
     params.require(:word).permit(:chinese, :pinyin,:translation)
   end
-  
+
+
+  def editor
+    @list = List.find(params[:list_id])
+
+    if current_user?(@list.creator)  or @list.collaborators.where(id: current_user.id).present? 
+      #No action necessary. Allow call back to complete without redirect    
+    else
+      flash[:danger] = "You do not have the authority to add/delete a word for this list"
+      redirect_to list_path(@list)
+    end
+  end
   
 end

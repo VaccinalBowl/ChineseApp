@@ -1,0 +1,16 @@
+<h1>Quiz</h1>
+
+<%= javascript_tag do %>
+words = <%= raw  @words.to_json %>;
+quiz_page = true; 
+current_word = 0; 
+current_index = 0; 
+<% end %>
+
+<div id="qs"></div>
+<div id="mandarin">Character/Characters:<input type="text" id="chinese_answer"></div>
+<div id="pinyin">Pinyin:<input type="text" id="pinyin_answer"></div>
+<button type="button" onclick="check_answer()" id="next_button">Next!</button>
+
+
+

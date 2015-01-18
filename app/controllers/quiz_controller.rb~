@@ -1,0 +1,13 @@
+class QuizController < ApplicationController
+  def test
+    list = List.find(quiz_params)
+    @words = list.words
+  end
+
+
+  private
+  def quiz_params
+    params.require(:id)
+  end
+  
+end

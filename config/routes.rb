@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  #get 'sessions/new'
 
-  root             'static_pages#home'
+
+  get     'quiz/:id'     => 'quiz#test'     
+  get     'chineseinput' => 'quiz#play'
+  root                    'static_pages#home'
   get     'help'       => 'static_pages#help'
   get     'about'      => 'static_pages#about'
   get     'contact'    => 'static_pages#contact'
@@ -10,30 +12,17 @@ Rails.application.routes.draw do
   get     'login'      => 'sessions#new'
   post    'login'      => 'sessions#create'
   delete  'logout'     => 'sessions#destroy'
-  
-
-  #get 'users/new'
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-  #root 'application#home'
-  # Example of regular route:
-  #get 'words/addmany' 
-  #get 'words/destroyall' => 'words#destroyall'
-  #post 'words/massadd' => 'words#massadd'
-  
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :microposts, only: [:create, :destroy]
+  resources :lists do
+    resources :words
+  end
+  patch   'list_add_learning_user' => 'lists#add_learning_user'
+  patch   'list_rem_learning_user' => 'lists#rem_learning_user'
+
+
   #resources :lists do     
   #  resources :words    
   #end 

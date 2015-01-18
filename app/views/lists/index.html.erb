@@ -1,20 +1,75 @@
-<h1>Listing names</h1>
- <%= link_to 'New List', new_list_path %><br/>
-<table>
+
+<%= link_to 'New List', new_list_path  %><br/>
+<h2>Available Lists</h2>
+<table class="table table-striped table-bordered table-condensed">
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Created By</th>
+    <th></th>
+    <th></th>
   </tr>
   
   <% @lists.each do |list| %>
   <tr>
     <td><%= list.name %></td>
     <td><%= list.description %></td>
-    <td><%= link_to 'Show', list_path(list) %></td>
-    <td><%= link_to 'Edit', edit_list_path(list) %></td>
-    <td><%= link_to 'Destroy', list_path(list), method: :delete, data: { confirm: 'Are you sure?' } %>
-    </td>
-    
+    <td><%= list.creator.username %></td>
+    <td><%= link_to 'Show', list_path(list )   %></td>
+    <td><%= link_to 'Use', list_add_learning_user_path(id: list.id ), method: :patch %></td>
   </tr>
   <% end %>
 </table>
+
+
+<h2>Currently learning lists</h2>
+
+<table class="table table-striped table-bordered table-condensed">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Created By</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @learning_lists.each do |list| %>
+  <tr>
+    <td><%= list.name %></td>
+    <td><%= list.description %></td>
+    <td><%= list.creator.username %></td>
+    <td><%= link_to 'Train' , "quiz/#{list.id}"%></td>
+    <td><%= link_to 'Stop Learning' , list_rem_learning_user_path(id: list.id ), method: :patch%></td> 
+  </tr>
+  <% end %>
+</table>
+
+
+<h2>Creator/Collaborator Lists</h2>
+
+<table class="table table-striped table-bordered table-condensed">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Created By</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @collaborating_lists.each do |list| %>
+  <tr>
+    <td><%= list.name %></td>
+    <td><%= list.description %></td>
+    <td><%= list.creator.username %></td>
+
+    <td><%= link_to 'Show' , list_path(list)%> </td>
+    <td><%= link_to 'Edit' , edit_list_path(list)%></td>
+    <td><%= link_to 'Destroy', list_path(list), method: :delete, data: { confirm: 'Are you sure?'}%></td>
+    <td><%= link_to 'Use', list_add_learning_user_path(id: list.id ), method: :patch %></td> 
+  </tr>
+  <% end %>
+</table>
+
+

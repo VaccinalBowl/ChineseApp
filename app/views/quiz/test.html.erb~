@@ -1,0 +1,19 @@
+
+<head>
+  <%= yield :head %>
+</head>
+<% content_for :head do %>
+<script type="text/javascript">
+  $(function() {
+  console.log("dude");
+  });
+</script>
+<% end %>
+
+
+
+
+
+
+
+<h1>Hello</h1>

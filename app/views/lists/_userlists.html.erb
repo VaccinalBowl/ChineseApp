@@ -1,0 +1,21 @@
+<%= will_paginate @learning_lists %>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Created By</th>
+    <th></th>
+    <th></th>
+  </tr>
+  
+  <% @learning_lists.each do |list| %>
+  <tr>
+    <td><%= list.name %></td>
+    <td><%= list.description %></td>
+    <td><%= list.creator.username %></td>
+    <td><%= link_to 'Train', '#' %></td>
+    <td><%= link_to 'Stop Learning','#' %></td>
+  </tr>
+  <% end %>
+</table>
+

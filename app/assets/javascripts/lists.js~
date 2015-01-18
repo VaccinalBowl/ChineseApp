@@ -1,0 +1,6 @@
+
+$(".audioButton").on("click", function() {
+    console.log("clciked");
+    $(".audio-play")[0].currentTime = 0;
+    return $(".audio-play")[0].play();
+});	   

@@ -15,16 +15,26 @@
   <th>Chinese</th>
   <th>Pinyin</th>
   <th>Translation</th>
+  <th>Audio</th>
   <th></th>
 </tr>
+
+
+<% sound_count = 1 %>
 <% @list.words.each do |word| %>
+
+
 <tr>
   <td><%= word.chinese %></td>
   <td><%= word.pinyin %></td>
   <td><%= word.translation %></td>
+  <td>
+    <%= audio_tag "#{word.pinyin}.mp3", class: "audio-play-#{sound_count}" %>
+    <p class="btn btn-primary" id=<%= "press_play_#{sound_count}" %>>Play</p>
+  </td>
   <td><%= link_to 'Destroy' ,list_word_path(@list.id,word.id),method: :delete, data: {confirm: 'Are you sure?' } %></td>
 </tr>
-
+<% sound_count = sound_count + 1 %> 
 <% end %>
 
 </table>
